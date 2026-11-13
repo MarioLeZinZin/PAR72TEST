@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "golf", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 4321 },
+    { "name": "back-office", "runtimeExecutable": "npm", "runtimeArgs": ["run", "cms"], "port": 8081 }
+  ]
+}

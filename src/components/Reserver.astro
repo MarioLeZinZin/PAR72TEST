@@ -1,0 +1,116 @@
+---
+import { site } from '../data/site';
+import Fleche from './Fleche.astro';
+---
+
+<section class="reserver sur-bordeaux" id="reserver" aria-labelledby="reserver-titre">
+  <div class="conteneur reserver__grille">
+    <div>
+      <h2 id="reserver-titre">Réservez votre départ</h2>
+      <p class="reserver__tel">
+        Adeline et Elise vous répondent aussi par téléphone au&nbsp;<a href={site.telephoneLien}>{site.telephone}</a>.
+      </p>
+    </div>
+
+    <ul class="reserver__portes">
+      <li>
+        <a href={site.reservation} target="_blank" rel="noopener">
+          <span class="reserver__qui">Vous venez jouer</span>
+          <span class="reserver__ou">Réserver sur Grip Resa <Fleche sortante /></span>
+        </a>
+      </li>
+      <li>
+        <a href={site.reservationMembres} target="_blank" rel="noopener">
+          <span class="reserver__qui">Vous êtes membre</span>
+          <span class="reserver__ou">Réserver sur Net Golf <Fleche sortante /></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .reserver {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+  }
+
+  .reserver__grille {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: end;
+  }
+
+  .reserver__tel {
+    max-width: 26rem;
+    margin-top: 1.5rem;
+    color: var(--sur-bordeaux-2);
+  }
+
+  .reserver__tel a {
+    color: var(--sur-bordeaux);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .reserver__portes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(251 243 244 / 0.32);
+  }
+
+  .reserver__portes a {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 2rem;
+    padding-block: 1.6rem;
+    border-bottom: 1px solid rgb(251 243 244 / 0.32);
+    text-decoration: none;
+  }
+
+  .reserver__qui {
+    font-family: var(--serif);
+    font-size: clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    transition: transform 0.6s var(--sortie);
+  }
+
+  .reserver__ou {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--sur-bordeaux-2);
+    transition: color 0.4s var(--sortie);
+  }
+
+  .reserver__ou :global(svg) {
+    width: 1em;
+    height: 1em;
+    transition: transform 0.5s var(--sortie);
+  }
+
+  @media (hover: hover) {
+    .reserver__portes a:hover .reserver__qui {
+      transform: translateX(0.75rem);
+    }
+
+    .reserver__portes a:hover .reserver__ou {
+      color: var(--sur-bordeaux);
+    }
+
+    .reserver__portes a:hover :global(svg) {
+      transform: translate(0.2em, -0.2em);
+    }
+  }
+
+  @media (min-width: 56rem) {
+    .reserver__grille {
+      grid-template-columns: 5fr 6fr;
+    }
+  }
+</style>

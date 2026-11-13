@@ -1,0 +1,195 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Fleche from '../components/Fleche.astro';
+import { site } from '../data/site';
+
+import clubHouse from '../assets/photos/club-house.jpg';
+import lavande from '../assets/photos/lavande.jpg';
+import seminaires from '../assets/actualites/seminaires.jpg';
+---
+
+<Base
+  titre="Bar · Restaurant"
+  description="Le bar-restaurant du club-house de la Grande Romanie : cuisine du mardi au dimanche, bar, terrasse, et accueil de séminaires face au parcours."
+>
+  <div class="conteneur titre-page">
+    <h1>Bar &amp; Restaurant</h1>
+    <p>Au club-house, pour que le 19<sup>e</sup> trou soit aussi sympathique que les dix-huit précédents.</p>
+  </div>
+
+  <div class="conteneur">
+    <figure class="cadre maison">
+      <Image
+        src={clubHouse}
+        alt="Le club-house et sa terrasse, vus depuis le green d’entraînement"
+        widths={[660]}
+        loading="eager"
+      />
+    </figure>
+  </div>
+
+  <section class="section">
+    <div class="conteneur salle">
+      <h2>Une table, un bar, et tout le club autour</h2>
+      <dl>
+        <div>
+          <dt>À table</dt>
+          <dd>
+            Derrière les fourneaux, Alexis se fait un plaisir de vous concocter ses plats du mardi au dimanche. La
+            carte va de l’entrée au dessert, avec des vins et des champagnes pour tous les budgets.
+          </dd>
+        </div>
+        <div>
+          <dt>Au bar</dt>
+          <dd>
+            De quoi vous désaltérer et refaire le parcours, installés dans les fauteuils et les canapés du club-house,
+            dans une ambiance chaleureuse et décontractée.
+          </dd>
+        </div>
+        <div>
+          <dt>À l’accueil</dt>
+          <dd>
+            Adeline et Elise vous renseignent sur le parcours. Vous y trouverez balles, tees et gants, et vous pourrez
+            louer un chariot manuel ou l’une des six voiturettes.
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--craie">
+    <div class="conteneur duo">
+      <div class="duo__texte texte">
+        <h2>Horaires du club-house</h2>
+        <ul class="horaires">
+          <li><span>En hiver</span><span>de 9&nbsp;h&nbsp;30 à 17&nbsp;h</span></li>
+          <li><span>En été</span><span>de 9&nbsp;h à 18&nbsp;h</span></li>
+          <li><span>Cuisine</span><span>du mardi au dimanche</span></li>
+        </ul>
+        <p class="attenue">
+          Pour réserver une table, appelez l’accueil au&nbsp;<a href={site.telephoneLien}>{site.telephone}</a>.
+        </p>
+      </div>
+      <figure class="duo__image cadre cadre--paysage cadre--devoile">
+        <Image src={lavande} alt="Le parcours vu des abords du club-house, derrière un massif de lavande" widths={[700]} />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="conteneur duo duo--inverse">
+      <div class="duo__texte texte">
+        <h2>Séminaires et évènements d’entreprise</h2>
+        <p>
+          Pour une formation, une journée ou une soirée, le club-house met à votre disposition une salle de réunion
+          équipée d’un rétroprojecteur, pouvant accueillir une vingtaine de personnes.
+        </p>
+        <p class="attenue">
+          Le restaurant assure petits-déjeuners, déjeuners, collations et dîners, et une initiation au golf d’une heure
+          trente environ peut être encadrée par le pro du club.
+        </p>
+        <a class="lien" href="/actualites/seminaires">En savoir plus <Fleche /></a>
+      </div>
+      <div class="duo__image affiche">
+        <Image src={seminaires} alt="Affiche du club : se mettre au vert pour votre évènement d’entreprise" widths={[520, 1037]} sizes="(min-width: 56rem) 40vw, 90vw" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .maison {
+    max-width: 50rem;
+    margin-inline: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .maison :global(img) {
+    object-position: 50% 12%;
+  }
+
+  .salle {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .salle h2 {
+    max-width: 16ch;
+  }
+
+  .salle dl {
+    margin: 0;
+    border-top: 1px solid var(--filet-fort);
+  }
+
+  .salle dl div {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--filet);
+  }
+
+  .salle dt {
+    font-family: var(--serif);
+    font-size: 1.625rem;
+    line-height: 1.15;
+  }
+
+  .salle dd {
+    margin: 0;
+    max-width: 36rem;
+    color: var(--encre-2);
+  }
+
+  @media (min-width: 44rem) {
+    .salle dl div {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 2rem;
+      align-items: baseline;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .salle {
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+  }
+
+  .horaires {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+    border-top: 1px solid var(--filet-fort);
+  }
+
+  .horaires li {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--filet);
+  }
+
+  .horaires li span:first-child {
+    color: var(--encre-2);
+  }
+
+  .horaires li span:last-child {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .affiche {
+    display: grid;
+    place-items: center;
+    padding: clamp(1.25rem, 3.5vw, 3rem);
+    background: var(--craie);
+  }
+
+  .affiche :global(img) {
+    box-shadow: 0 1.5rem 3rem -1.5rem rgb(20 34 27 / 0.45);
+  }
+</style>

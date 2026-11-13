@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import Competitions from '../components/Competitions.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  titre="Calendrier des compétitions"
+  description="Le calendrier des compétitions du Golf de la Grande Romanie, à Courtisols près de Châlons-en-Champagne."
+>
+  <div class="conteneur titre-page">
+    <h1>Calendrier des compétitions</h1>
+    <p>
+      Pour vous inscrire, passez à l’accueil du club ou appelez le&nbsp;<a href={site.telephoneLien}>{site.telephone}</a>.
+    </p>
+  </div>
+
+  <section class="conteneur calendrier">
+    <h2>À venir</h2>
+    <Competitions mode="a-venir" />
+  </section>
+
+  <section class="conteneur calendrier calendrier--passees" data-passees>
+    <details>
+      <summary>
+        <h2>Compétitions passées</h2>
+        <span class="calendrier__signe" aria-hidden="true"></span>
+      </summary>
+      <Competitions mode="passees" />
+    </details>
+  </section>
+</Base>
+
+<script>
+  // Tant qu'aucune compétition n'est passée, la section reste masquée.
+  const section = document.querySelector<HTMLElement>('[data-passees]');
+  if (section) section.hidden = !section.querySelector('[data-date]:not([hidden])');
+</script>
+
+<style>
+  .titre-page a {
+    color: var(--encre);
+    white-space: nowrap;
+  }
+
+  .calendrier {
+    max-width: 62rem;
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .calendrier h2 {
+    font-size: clamp(1.625rem, 1.4rem + 1vw, 2.125rem);
+  }
+
+  .calendrier > h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .calendrier--passees {
+    padding-bottom: var(--souffle);
+  }
+
+  .calendrier--passees[hidden] {
+    display: none;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--filet-fort);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .calendrier__signe {
+    position: relative;
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: none;
+  }
+
+  .calendrier__signe::before,
+  .calendrier__signe::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto 0;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.5s var(--sortie);
+  }
+
+  .calendrier__signe::after {
+    transform: rotate(90deg);
+  }
+
+  details[open] .calendrier__signe::after {
+    transform: rotate(0deg);
+  }
+
+  details :global(ol) {
+    border-top-color: var(--filet);
+  }
+
+  details :global(.competitions) {
+    color: var(--encre-2);
+  }
+</style>

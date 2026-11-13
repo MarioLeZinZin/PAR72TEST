@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T17:00:00+01:00",
+  "title": "Design System: La Grande Romanie",
+  "extensions": {
+    "colorMeta": {
+      "bordeaux": {
+        "role": "primary",
+        "displayName": "Bordeaux du blason",
+        "canonical": "oklch(40.9% 0.164 20)",
+        "tonalRamp": [
+          "#220001",
+          "#4f000e",
+          "#7f061e",
+          "#ad2c3a",
+          "#d7545b",
+          "#fe7e81",
+          "#feb9b8",
+          "#ffe8e8"
+        ]
+      },
+      "bordeaux-2": {
+        "role": "primary",
+        "displayName": "Bordeaux profond",
+        "canonical": "oklch(33.9% 0.136 19)",
+        "tonalRamp": [
+          "#220001",
+          "#4f000f",
+          "#7a1424",
+          "#a23c43",
+          "#cb6065",
+          "#f48588",
+          "#ffb9b9",
+          "#ffe8e8"
+        ]
+      },
+      "sur-bordeaux": {
+        "role": "primary",
+        "displayName": "Rose de craie",
+        "canonical": "oklch(97.1% 0.009 9)",
+        "tonalRamp": [
+          "#0f0a0a",
+          "#2a2525",
+          "#474141",
+          "#686162",
+          "#8b8485",
+          "#b0a9aa",
+          "#d3cbcc",
+          "#f4eced"
+        ]
+      },
+      "sur-bordeaux-2": {
+        "role": "primary",
+        "displayName": "Rose passé",
+        "canonical": "oklch(85.2% 0.044 6)",
+        "tonalRamp": [
+          "#190308",
+          "#381d23",
+          "#57383f",
+          "#7a595f",
+          "#9e7b82",
+          "#c4a0a7",
+          "#e8c2c9",
+          "#fee8ec"
+        ]
+      },
+      "vert": {
+        "role": "secondary",
+        "displayName": "Vert anglais",
+        "canonical": "oklch(33.1% 0.061 161)",
+        "tonalRamp": [
+          "#001006",
+          "#002f1c",
+          "#214c38",
+          "#426e58",
+          "#65927a",
+          "#89b79e",
+          "#abdbc1",
+          "#ccfce1"
+        ]
+      },
+      "vert-2": {
+        "role": "secondary",
+        "displayName": "Vert de nuit",
+        "canonical": "oklch(27.1% 0.049 161)",
+        "tonalRamp": [
+          "#001006",
+          "#0c2e1f",
+          "#294a3a",
+          "#4a6c5a",
+          "#6c907d",
+          "#90b5a1",
+          "#b3d8c4",
+          "#d3f9e4"
+        ]
+      },
+      "sur-vert": {
+        "role": "secondary",
+        "displayName": "Craie sur vert",
+        "canonical": "oklch(97.2% 0.007 132)",
+        "tonalRamp": [
+          "#0a0c09",
+          "#252724",
+          "#41433f",
+          "#626460",
+          "#848783",
+          "#a9aca7",
+          "#cccfca",
+          "#edf0eb"
+        ]
+      },
+      "sur-vert-2": {
+        "role": "secondary",
+        "displayName": "Sauge claire",
+        "canonical": "oklch(83.4% 0.031 158)",
+        "tonalRamp": [
+          "#010f06",
+          "#192b21",
+          "#35473c",
+          "#55695d",
+          "#778c7f",
+          "#9cb1a3",
+          "#bed4c6",
+          "#def5e7"
+        ]
+      },
+      "vert-vif": {
+        "role": "tertiary",
+        "displayName": "Vert vif du blason",
+        "canonical": "oklch(50.4% 0.133 152)",
+        "tonalRamp": [
+          "#001102",
+          "#003013",
+          "#045026",
+          "#0f773c",
+          "#3a9c5c",
+          "#63c380",
+          "#87e7a2",
+          "#c7ffd4"
+        ]
+      },
+      "blanc": {
+        "role": "neutral",
+        "displayName": "Blanc de craie",
+        "canonical": "oklch(99.2% 0.002 165)",
+        "tonalRamp": [
+          "#0a0b0b",
+          "#252726",
+          "#414342",
+          "#626463",
+          "#858786",
+          "#a9abaa",
+          "#cccecd",
+          "#edefee"
+        ]
+      },
+      "craie": {
+        "role": "neutral",
+        "displayName": "Craie",
+        "canonical": "oklch(96.0% 0.006 170)",
+        "tonalRamp": [
+          "#090c0b",
+          "#242726",
+          "#3f4342",
+          "#606463",
+          "#838785",
+          "#a7acaa",
+          "#cacfcd",
+          "#ebf0ee"
+        ]
+      },
+      "craie-2": {
+        "role": "neutral",
+        "displayName": "Craie ombrée",
+        "canonical": "oklch(92.5% 0.008 169)",
+        "tonalRamp": [
+          "#080c0a",
+          "#232826",
+          "#3e4441",
+          "#5f6562",
+          "#818885",
+          "#a6adaa",
+          "#c9d0cd",
+          "#e9f0ed"
+        ]
+      },
+      "encre": {
+        "role": "neutral",
+        "displayName": "Encre vert-noir",
+        "canonical": "oklch(23.6% 0.024 162)",
+        "tonalRamp": [
+          "#030e08",
+          "#1c2a23",
+          "#37463f",
+          "#58685f",
+          "#7a8b82",
+          "#9eb0a6",
+          "#c1d3c9",
+          "#e1f4ea"
+        ]
+      },
+      "encre-2": {
+        "role": "neutral",
+        "displayName": "Encre adoucie",
+        "canonical": "oklch(43.5% 0.022 160)",
+        "tonalRamp": [
+          "#040e08",
+          "#1d2a23",
+          "#39463e",
+          "#59675f",
+          "#7b8a82",
+          "#a0afa6",
+          "#c2d2c9",
+          "#e3f3ea"
+        ]
+      },
+      "repere-blanc": {
+        "role": "neutral",
+        "displayName": "Fanion blanc",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#424242",
+          "#636363",
+          "#868686",
+          "#ababab",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "repere-jaune": {
+        "role": "neutral",
+        "displayName": "Fanion jaune",
+        "canonical": "oklch(84.7% 0.155 93)",
+        "tonalRamp": [
+          "#120a00",
+          "#302500",
+          "#514100",
+          "#786100",
+          "#a18302",
+          "#cba716",
+          "#f1ca3f",
+          "#feeebb"
+        ]
+      },
+      "repere-bleu": {
+        "role": "neutral",
+        "displayName": "Fanion bleu",
+        "canonical": "oklch(78.0% 0.085 249)",
+        "tonalRamp": [
+          "#000b21",
+          "#00274a",
+          "#18456d",
+          "#3a6792",
+          "#5d8ab8",
+          "#81afdf",
+          "#a8d2ff",
+          "#e2f0ff"
+        ]
+      },
+      "repere-rouge": {
+        "role": "neutral",
+        "displayName": "Fanion rouge",
+        "canonical": "oklch(70.7% 0.142 25)",
+        "tonalRamp": [
+          "#220000",
+          "#4f0006",
+          "#7d1015",
+          "#a53a37",
+          "#ce5f58",
+          "#f7847c",
+          "#ffbab3",
+          "#ffe9e6"
+        ]
+      },
+      "filet": {
+        "role": "neutral",
+        "displayName": "Filet",
+        "canonical": "rgb(20 34 27 / 0.16)"
+      },
+      "filet-fort": {
+        "role": "neutral",
+        "displayName": "Filet fort",
+        "canonical": "rgb(20 34 27 / 0.42)"
+      },
+      "filet-vert": {
+        "role": "neutral",
+        "displayName": "Filet sur vert",
+        "canonical": "rgb(244 247 242 / 0.22)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Titre de page, un par page."
+      },
+      "display-article": {
+        "displayName": "Display article",
+        "purpose": "Titre d'un article et des pages de texte."
+      },
+      "chiffre": {
+        "displayName": "Chiffre",
+        "purpose": "Total en mètres de la carte de score ; jour des compétitions, plus petit."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Titre de section."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Nom d'une compétition, titre d'une actualité."
+      },
+      "title-sm": {
+        "displayName": "Title petit",
+        "purpose": "Légendes de tableau, termes de liste, téléphone du pied de page."
+      },
+      "mot-symbole": {
+        "displayName": "Mot-symbole",
+        "purpose": "« La Grande Romanie » en capitales espacées, avec le blason. Seul usage des capitales."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texte courant, colonne de 34rem."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Liens, boutons, navigation, repères."
+      },
+      "legende": {
+        "displayName": "Légende",
+        "purpose": "Légendes de photo, dates, en-têtes de tableau, notes."
+      }
+    },
+    "shadows": [
+      {
+        "name": "affiche-posee",
+        "value": "0 1.5rem 3rem -1.5rem rgb(20 34 27 / 0.45)",
+        "purpose": "Sous une affiche présentée dans son passe-partout (0 1.25rem 2.5rem -1.25rem dans les vignettes)."
+      },
+      {
+        "name": "bouton-a-cheval",
+        "value": "0 1rem 2.25rem -1rem rgb(20 34 27 / 0.55)",
+        "purpose": "Sous le bouton de réservation qui chevauche la photo d'ouverture."
+      },
+      {
+        "name": "lisere",
+        "value": "0 0 0 0.625rem #fbfdfc",
+        "purpose": "Marge blanche autour de la petite photo qui chevauche la grande."
+      }
+    ],
+    "motion": [
+      {
+        "name": "sortie",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Courbe unique du site : transitions, entrées, drapeaux."
+      },
+      {
+        "name": "duree-etat",
+        "value": "0.35s",
+        "purpose": "Changements de couleur des boutons et des repères."
+      },
+      {
+        "name": "duree-lien",
+        "value": "0.5s",
+        "purpose": "Soulignés et flèches."
+      },
+      {
+        "name": "duree-drapeau",
+        "value": "1.1s",
+        "purpose": "Hauteur des mâts, décalée de 28ms par trou."
+      },
+      {
+        "name": "duree-compteur",
+        "value": "0.9s",
+        "purpose": "Décompte du total en mètres."
+      },
+      {
+        "name": "entree-ouverture",
+        "value": "1.2s à 2.2s",
+        "purpose": "Entrée unique de la première fenêtre de l'accueil : marque, titre, photo qui se lève, filets qui se tirent."
+      },
+      {
+        "name": "mouvement-reduit",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Transitions et animations ramenées à 0.01ms, défilement doux coupé, compteur instantané, dévoilements non appliqués."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "barre-mobile",
+        "value": "48rem"
+      },
+      {
+        "name": "duo",
+        "value": "56rem"
+      },
+      {
+        "name": "carte-une-ligne",
+        "value": "64rem"
+      },
+      {
+        "name": "rubriques",
+        "value": "72rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bouton Réserver",
+      "kind": "button",
+      "refersTo": "bouton-reserver",
+      "description": "Le seul bouton du système : il mène à la réservation d'un départ.",
+      "html": "<a class=\"ds-bouton\" href=\"#\">Réserver un départ <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" aria-hidden=\"true\"><path d=\"M4.5 11.5l7-7M5.5 4.5h6v6\"/></svg></a>",
+      "css": ".ds-bouton { display: inline-flex; align-items: center; justify-content: center; gap: 0.7em; min-height: 3.25rem; padding: 0.8rem 1.75rem; border: 1px solid var(--bordeaux); background: var(--bordeaux); color: var(--sur-bordeaux); font: 500 0.9375rem / 1.2 var(--sans); letter-spacing: 0.01em; text-decoration: none; cursor: pointer; transition: background-color 0.35s var(--sortie), border-color 0.35s var(--sortie), transform 0.2s var(--sortie); } .ds-bouton svg { width: 1em; height: 1em; flex: none; } .ds-bouton:hover { background: var(--bordeaux-2); border-color: var(--bordeaux-2); } .ds-bouton:active { transform: scale(0.98); } .ds-bouton:focus-visible { outline: 2px solid var(--bordeaux); outline-offset: 4px; }"
+    },
+    {
+      "name": "Lien souligné",
+      "kind": "custom",
+      "refersTo": "lien",
+      "description": "Action secondaire d'une section : le filet se retire au survol, la flèche avance.",
+      "html": "<a class=\"ds-lien\" href=\"#\">Découvrir le parcours <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" aria-hidden=\"true\"><path d=\"M2 8h12M9.5 3.5L14 8l-4.5 4.5\"/></svg></a>",
+      "css": ".ds-lien { display: inline-flex; align-items: center; gap: 0.6em; font: 500 0.9375rem var(--sans); color: var(--encre); text-decoration: none; padding-block: 0.45rem; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size 0.5s var(--sortie); } .ds-lien svg { width: 1.05em; height: 1.05em; transition: transform 0.5s var(--sortie); } .ds-lien:hover { background-size: 0% 1px; background-position: 100% 100%; } .ds-lien:hover svg { transform: translateX(0.3em); } .ds-lien:focus-visible { outline: 2px solid var(--bordeaux); outline-offset: 4px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Rubriques de la barre d'en-tête ; la rubrique courante et la rubrique survolée sont soulignées d'un filet qui se tire.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Parcours</a><a href=\"#\">Bar · Restaurant</a><a href=\"#\">Compétitions</a><a href=\"#\">Actualités</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 2.25rem; font: 400 0.9375rem var(--sans); color: var(--encre); } .ds-nav a { position: relative; padding-block: 0.6rem; color: inherit; text-decoration: none; white-space: nowrap; } .ds-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.25rem; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 100% 50%; transition: transform 0.5s var(--sortie); } .ds-nav a[aria-current='page']::after { transform: scaleX(1); } .ds-nav a:hover::after { transform: scaleX(1); transform-origin: 0 50%; } .ds-nav a:focus-visible { outline: 2px solid var(--bordeaux); outline-offset: 4px; }"
+    },
+    {
+      "name": "Sélecteur de repères",
+      "kind": "chip",
+      "refersTo": "repere",
+      "description": "Quatre cases radio au filet, sur aplat vert ; la case choisie se remplit de craie.",
+      "html": "<fieldset class=\"ds-reperes\"><label class=\"ds-repere\"><input type=\"radio\" name=\"ds-repere\" checked><span class=\"ds-pastille\" style=\"--c:#ffffff\"></span>Blancs</label><label class=\"ds-repere\"><input type=\"radio\" name=\"ds-repere\"><span class=\"ds-pastille\" style=\"--c:#f0c93d\"></span>Jaunes</label><label class=\"ds-repere\"><input type=\"radio\" name=\"ds-repere\"><span class=\"ds-pastille\" style=\"--c:#8dbcec\"></span>Bleus</label><label class=\"ds-repere\"><input type=\"radio\" name=\"ds-repere\"><span class=\"ds-pastille\" style=\"--c:#ec7a72\"></span>Rouges</label></fieldset>",
+      "css": ".ds-reperes { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 1.5rem; border: 0; background: var(--vert); color: var(--sur-vert); } .ds-repere { position: relative; display: inline-flex; align-items: center; gap: 0.6rem; min-height: 2.875rem; padding: 0.5rem 1.1rem 0.5rem 0.9rem; border: 1px solid var(--filet-vert); font: 500 0.9375rem var(--sans); cursor: pointer; transition: background-color 0.35s var(--sortie), border-color 0.35s var(--sortie), color 0.35s var(--sortie); } .ds-repere input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; } .ds-pastille { width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1px rgb(12 46 31 / 0.35); } .ds-repere:has(input:checked) { background: var(--sur-vert); border-color: var(--sur-vert); color: var(--vert-2); } .ds-repere:not(:has(input:checked)):hover { border-color: var(--sur-vert); } .ds-repere:has(input:focus-visible) { outline: 2px solid var(--sur-vert); outline-offset: 3px; }"
+    },
+    {
+      "name": "Carte de score à drapeaux",
+      "kind": "custom",
+      "refersTo": "section-vert",
+      "description": "Pièce signature : un mât par trou, haut comme sa distance, sur trois rangs au filet (ici l'aller, repères blancs).",
+      "html": "<div class=\"ds-carte\"><p class=\"ds-carte-metres\">6 145 m</p><ol class=\"ds-trous\"><li class=\"ds-trou\" style=\"--d:0.722;--i:0\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">1</span><span class=\"ds-trou-par\">4</span><span class=\"ds-trou-m\">380</span></li><li class=\"ds-trou\" style=\"--d:0.663;--i:1\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">2</span><span class=\"ds-trou-par\">4</span><span class=\"ds-trou-m\">349</span></li><li class=\"ds-trou\" style=\"--d:0.933;--i:2\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">3</span><span class=\"ds-trou-par\">5</span><span class=\"ds-trou-m\">491</span></li><li class=\"ds-trou\" style=\"--d:0.312;--i:3\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">4</span><span class=\"ds-trou-par\">3</span><span class=\"ds-trou-m\">164</span></li><li class=\"ds-trou\" style=\"--d:0.975;--i:4\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">5</span><span class=\"ds-trou-par\">5</span><span class=\"ds-trou-m\">513</span></li><li class=\"ds-trou\" style=\"--d:0.591;--i:5\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">6</span><span class=\"ds-trou-par\">4</span><span class=\"ds-trou-m\">311</span></li><li class=\"ds-trou\" style=\"--d:0.578;--i:6\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">7</span><span class=\"ds-trou-par\">4</span><span class=\"ds-trou-m\">304</span></li><li class=\"ds-trou\" style=\"--d:0.702;--i:7\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">8</span><span class=\"ds-trou-par\">4</span><span class=\"ds-trou-m\">369</span></li><li class=\"ds-trou\" style=\"--d:0.321;--i:8\"><span class=\"ds-trou-ciel\"><span class=\"ds-trou-mat\"></span></span><span class=\"ds-trou-n\">9</span><span class=\"ds-trou-par\">3</span><span class=\"ds-trou-m\">169</span></li></ol></div>",
+      "css": ".ds-carte { padding: 2rem; background: var(--vert); color: var(--sur-vert); font-family: var(--sans); } .ds-carte-metres { margin: 0 0 2rem; font-family: var(--serif); font-size: 3.75rem; line-height: 0.95; letter-spacing: -0.02em; font-variant-numeric: lining-nums tabular-nums; } .ds-trous { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; font-variant-numeric: tabular-nums lining-nums; } .ds-trou { display: grid; grid-template-rows: 9rem repeat(3, 2.5rem); justify-items: center; text-align: center; transition: opacity 0.4s var(--sortie); } .ds-trou-ciel { position: relative; width: 100%; height: 100%; } .ds-trou-mat { position: absolute; left: 50%; bottom: 0; width: 1px; height: calc(var(--d) * 100%); background: var(--sur-vert); transition: height 1.1s var(--sortie); transition-delay: calc(var(--i) * 28ms); } .ds-trou-mat::before { content: ''; position: absolute; top: 0; left: 1px; width: 0.75rem; aspect-ratio: 14 / 10; background: #ffffff; clip-path: polygon(0 0, 100% 50%, 0 100%); } .ds-trou-n, .ds-trou-par, .ds-trou-m { display: grid; place-items: center; width: 100%; border-top: 1px solid var(--filet-vert); font-size: 0.875rem; } .ds-trou-n { border-top-color: var(--sur-vert); font-family: var(--serif); font-size: 1.25rem; } .ds-trou-par { color: var(--sur-vert-2); } .ds-trou-m { border-bottom: 1px solid var(--filet-vert); font-weight: 500; } .ds-trous:hover .ds-trou:not(:hover) { opacity: 0.4; }"
+    },
+    {
+      "name": "Cadre photo",
+      "kind": "card",
+      "refersTo": "cadre",
+      "description": "Toute photographie : cadre à angles vifs, proportion fixe, légende dessous. Jamais en fond.",
+      "html": "<figure class=\"ds-cadre\"><div class=\"ds-cadre-image\"></div><figcaption>La terrasse du club-house</figcaption></figure>",
+      "css": ".ds-cadre { margin: 0; max-width: 24rem; font-family: var(--sans); } .ds-cadre-image { aspect-ratio: 3 / 2; overflow: hidden; background: var(--craie-2); } .ds-cadre figcaption { margin-top: 0.9rem; font-size: 0.8125rem; color: var(--encre-2); }"
+    },
+    {
+      "name": "Passe-partout",
+      "kind": "card",
+      "refersTo": "passe-partout",
+      "description": "Vignette d'actualité : l'affiche entière dans sa marge de craie, ou le titre sur aplat vert quand il n'y a pas d'affiche.",
+      "html": "<a class=\"ds-actu\" href=\"#\"><div class=\"ds-pp\"><h3>Scramble du Beaujolais</h3></div><time>22 novembre 2026</time></a>",
+      "css": ".ds-actu { display: block; max-width: 18rem; text-decoration: none; color: var(--encre); font-family: var(--sans); } .ds-pp { display: grid; align-items: end; aspect-ratio: 4 / 5; padding: 1.75rem; background: var(--vert); color: var(--sur-vert); } .ds-pp h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1.08; letter-spacing: -0.01em; } .ds-actu time { display: block; margin-top: 1.25rem; font-size: 0.8125rem; color: var(--encre-2); } .ds-actu:focus-visible { outline: 2px solid var(--bordeaux); outline-offset: 4px; }"
+    },
+    {
+      "name": "Rang de compétition",
+      "kind": "custom",
+      "description": "Liste au filet : filet fort pour ouvrir, filet fin par rang, le jour en grand chiffre Caslon.",
+      "html": "<ol class=\"ds-comp\"><li><time><span class=\"ds-comp-jour\">15</span><span class=\"ds-comp-mois\">Novembre 2026<span>Dimanche</span></span></time><div><h3>November Cup</h3></div><p class=\"ds-comp-type\">Stableford</p></li><li><time><span class=\"ds-comp-jour\">22</span><span class=\"ds-comp-mois\">Novembre 2026<span>Dimanche</span></span></time><div><h3>Scramble du Beaujolais</h3></div><p class=\"ds-comp-type\">Scramble</p></li></ol>",
+      "css": ".ds-comp { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--filet-fort); color: var(--encre); font-family: var(--sans); } .ds-comp li { display: grid; grid-template-columns: 13.5rem minmax(0, 1fr) auto; align-items: center; gap: 2rem; padding-block: 1.75rem; border-bottom: 1px solid var(--filet); } .ds-comp time { display: flex; align-items: center; gap: 1rem; } .ds-comp-jour { font-family: var(--serif); font-size: 3.75rem; line-height: 0.9; letter-spacing: -0.02em; font-variant-numeric: lining-nums; min-width: 1.6ch; } .ds-comp-mois { display: grid; font-size: 0.9375rem; font-weight: 500; line-height: 1.35; } .ds-comp-mois span { font-weight: 400; color: var(--encre-2); } .ds-comp h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.01em; } .ds-comp-type { margin: 0; font-size: 0.875rem; font-weight: 500; color: var(--vert-vif); text-align: right; }"
+    },
+    {
+      "name": "Portes de réservation",
+      "kind": "custom",
+      "refersTo": "section-reserver",
+      "description": "Clôture de chaque page : aplat bordeaux, une porte par public entre deux filets clairs.",
+      "html": "<ul class=\"ds-portes\"><li><a href=\"#\"><span class=\"ds-porte-qui\">Vous venez jouer</span><span class=\"ds-porte-ou\">Réserver sur Grip Resa <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" aria-hidden=\"true\"><path d=\"M4.5 11.5l7-7M5.5 4.5h6v6\"/></svg></span></a></li><li><a href=\"#\"><span class=\"ds-porte-qui\">Vous êtes membre</span><span class=\"ds-porte-ou\">Réserver sur Net Golf <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" aria-hidden=\"true\"><path d=\"M4.5 11.5l7-7M5.5 4.5h6v6\"/></svg></span></a></li></ul>",
+      "css": ".ds-portes { list-style: none; margin: 0; padding: 2rem; background: var(--bordeaux); color: var(--sur-bordeaux); font-family: var(--sans); } .ds-portes li:first-child a { border-top: 1px solid rgb(251 243 244 / 0.32); } .ds-portes a { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.4rem 2rem; padding-block: 1.6rem; border-bottom: 1px solid rgb(251 243 244 / 0.32); color: inherit; text-decoration: none; } .ds-porte-qui { font-family: var(--serif); font-size: 2rem; line-height: 1.1; letter-spacing: -0.01em; transition: transform 0.6s var(--sortie); } .ds-porte-ou { display: inline-flex; align-items: center; gap: 0.6em; font-size: 0.9375rem; font-weight: 500; color: var(--sur-bordeaux-2); transition: color 0.4s var(--sortie); } .ds-porte-ou svg { width: 1em; height: 1em; transition: transform 0.5s var(--sortie); } .ds-portes a:hover .ds-porte-qui { transform: translateX(0.75rem); } .ds-portes a:hover .ds-porte-ou { color: var(--sur-bordeaux); } .ds-portes a:hover svg { transform: translate(0.2em, -0.2em); } .ds-portes a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La maison du links",
+    "overview": "Le parcours se présente comme une maison de luxe présente ses chambres : peu de mots, beaucoup d'air, des photographies accrochées comme des tableaux, et la carte de score pour pièce maîtresse. La page est claire et calme, un blanc de craie légèrement froid sur lequel une encre vert-noir écrit en Caslon fin. Deux couleurs seulement rompent ce calme, celles du blason : le vert anglais, posé en aplats pleins, et le bordeaux, qui ne sert qu'à réserver.\n\nLa densité est basse. Chaque section respire d'un grand souffle vertical, le texte tient dans une colonne étroite, et la structure vient de filets d'un pixel repris de la grille d'une carte de score plutôt que de boîtes, de cartes ou d'ombres. Tout est à angles vifs. Le mouvement est lent et amorti, une seule courbe pour tout le site, et il s'efface entièrement quand le visiteur demande un mouvement réduit.\n\nCe système refuse la page de golf habituelle : la photo plein écran assombrie sous un titre, les pictogrammes en grille, le vert gazon partout.",
+    "keyCharacteristics": [
+      "Fond de craie froid, encre vert-noir, deux couleurs de blason aux rôles séparés.",
+      "Libre Caslon Display pour les titres et les grands chiffres, Hanken Grotesk pour tout le reste, auto-hébergées.",
+      "Photographies toujours cadrées, à proportions fixes, jamais en fond.",
+      "Filets d'un pixel tirés de la carte de score ; aucun arrondi, aucune carte à bordure.",
+      "Réserver à un geste sur chaque page : barre d'en-tête, barre fixe sur téléphone, section bordeaux en fin de page.",
+      "La carte de score à drapeaux, pièce signature."
+    ],
+    "rules": [
+      {
+        "name": "La règle de la presse",
+        "body": "Le bordeaux n'habille que ce qui se presse pour réserver, plus le focus clavier, la sélection et le curseur. Jamais un titre, un filet ou un décor en bordeaux.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle de l'aplat",
+        "body": "Le vert anglais se pose en surface pleine : une section entière, bord à bord, ou une vignette entière. Jamais en dégradé, en filet ni en couleur de texte. Les petites marques vertes sont en vert vif.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle de la craie",
+        "body": "Les fonds clairs sont froids, teintés vers le vert. Jamais crème, jamais ivoire, jamais blanc pur en fond de page.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle des deux voix",
+        "body": "Caslon en 400 pour les titres, les grands chiffres et le mot-symbole ; Hanken pour tout le reste, en 400, 500 ou 600. Aucun gras de titre, aucune italique d'effet.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle des capitales",
+        "body": "Seul le mot-symbole est en capitales espacées. Aucun libellé, bouton ou intertitre en majuscules.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle des chiffres alignés",
+        "body": "Toute donnée chiffrée (distances, tarifs, téléphone, dates) est en chiffres alignés tabulaires.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle de l'objet posé",
+        "body": "Une ombre n'existe que sous un objet posé sur la page : une affiche, le bouton à cheval sur la photo. Elle est diffuse, teintée d'encre et décalée vers le bas. Sections, listes, tableaux et boutons courants n'en portent pas.",
+        "section": "elevation"
+      },
+      {
+        "name": "La règle de l'angle vif",
+        "body": "Aucun arrondi, sur aucun élément. Le cercle est réservé aux pastilles de repère.",
+        "section": "shapes"
+      },
+      {
+        "name": "La règle du filet",
+        "body": "La structure se trace au filet d'un pixel, jamais avec une boîte à bordure ni une carte. Un filet fort pour ouvrir, un filet fin par rang.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do réserver le bordeaux à ce qui mène à la réservation, et garder cette action à un geste sur chaque page et chaque largeur d'écran.",
+      "Do poser le vert anglais en section entière, bord à bord, avec les textes en `sur-vert` et `sur-vert-2`.",
+      "Do cadrer chaque photographie dans une proportion fixe et lui donner un texte alternatif qui décrit ce qu'elle montre.",
+      "Do montrer les affiches entières dans un passe-partout de craie.",
+      "Do structurer listes et tableaux au filet d'un pixel : filet fort pour ouvrir, filet fin par rang.",
+      "Do composer les titres en Libre Caslon Display 400 et tout le reste en Hanken Grotesk.",
+      "Do animer avec `--sortie` et prévoir l'état sans mouvement.",
+      "Do mettre toute donnée chiffrée en chiffres alignés tabulaires."
+    ],
+    "donts": [
+      "Don't utiliser le bordeaux pour un titre, un filet, une puce ou un décor.",
+      "Don't mettre une photographie en fond de section ni poser un titre ou un paragraphe dessus.",
+      "Don't arrondir un angle : ni bouton en pilule, ni carte arrondie, ni image à coins doux.",
+      "Don't réchauffer les fonds vers le crème ou l'ivoire.",
+      "Don't étaler le vert gazon : le vert vif reste une petite marque.",
+      "Don't enfermer un contenu dans une carte à bordure ou à ombre ; l'ombre est réservée à l'objet posé.",
+      "Don't composer un libellé en capitales espacées ; seul le mot-symbole l'est.",
+      "Don't ajouter une grille de pictogrammes ni une icône autre que la flèche au trait.",
+      "Don't rogner une affiche du club."
+    ]
+  }
+}

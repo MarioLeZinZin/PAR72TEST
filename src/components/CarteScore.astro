@@ -1,0 +1,433 @@
+---
+// La pièce maîtresse : dix-huit drapeaux dont la hauteur est la distance du trou.
+// Le visiteur choisit ses repères, tout le parcours se recalcule.
+import { reperes, trous, totaux, plusLong, milliers } from '../data/parcours';
+
+interface Props {
+  titre?: string;
+  niveau?: 'h1' | 'h2';
+}
+
+const { titre = 'Choisissez vos repères', niveau: Titre = 'h2' } = Astro.props;
+---
+
+<div class="carte" data-carte data-repere="blanc">
+  <div class="carte__tete">
+    <div class="carte__intro">
+      <Titre class="carte__titre">{titre}</Titre>
+      <p>
+        Des repères blancs, le parcours est homologué pour 6&#8239;145 mètres, ce qui en fait l’un des plus longs de
+        France. Sélectionnez vos départs pour lire la distance de chaque trou.
+      </p>
+    </div>
+
+    <div class="carte__reglage">
+      <fieldset class="reperes">
+        <legend class="hors-ecran">Repères de départ</legend>
+        {
+          reperes.map((r) => (
+            <label class="repere">
+              <input type="radio" name="repere" value={r.id} checked={r.id === 'blanc'} />
+              <span class="repere__pastille" style={`--c:${r.couleur}`} />
+              {r.nom}
+            </label>
+          ))
+        }
+      </fieldset>
+
+      <p class="carte__total" aria-live="polite" aria-atomic="true">
+        <span class="carte__metres"><span data-total>{milliers(totaux.blanc)}</span>&nbsp;m</span>
+        <span class="carte__par">Par {totaux.par}, dix-huit trous</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="profil">
+    <div class="profil__lignes" aria-hidden="true">
+      <span>Trou</span>
+      <span>Par</span>
+      <span>Mètres</span>
+    </div>
+    <ol class="trous">
+      {
+        trous.map((t, i) => (
+          <li
+            class="trou"
+            style={`--d:${t.blanc / plusLong};--i:${i}`}
+            data-blanc={t.blanc}
+            data-jaune={t.jaune}
+            data-bleu={t.bleu}
+            data-rouge={t.rouge}
+          >
+            <span class="trou__ciel" aria-hidden="true">
+              <span class="trou__mat" />
+            </span>
+            <span class="trou__n">
+              <span class="hors-ecran">Trou </span>
+              {t.n}
+            </span>
+            <span class="trou__par">
+              <span class="hors-ecran">, par </span>
+              {t.par}
+            </span>
+            <span class="trou__m">
+              <span class="hors-ecran">, </span>
+              <span data-m>{t.blanc}</span>
+              <span class="hors-ecran"> mètres</span>
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <p class="carte__note">Trou, par et distance en mètres. Aller du 1 au 9, retour du 10 au 18.</p>
+</div>
+
+<script>
+  const totaux: Record<string, number> = { blanc: 6145, jaune: 5476, bleu: 5225, rouge: 4529 };
+  const calme = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const milliers = (n: number) => Math.round(n).toLocaleString('fr-FR').replace(/\s/g, ' ');
+
+  document.querySelectorAll<HTMLElement>('[data-carte]').forEach((carte) => {
+    const trous = [...carte.querySelectorAll<HTMLElement>('.trou')];
+    const total = carte.querySelector<HTMLElement>('[data-total]');
+    const plusLong = Math.max(...trous.map((t) => Number(t.dataset.blanc)));
+    let affiche = totaux.blanc;
+    let image = 0;
+
+    const compter = (vers: number) => {
+      if (!total) return;
+      cancelAnimationFrame(image);
+      if (calme.matches) {
+        total.textContent = milliers(vers);
+        affiche = vers;
+        return;
+      }
+      const depuis = affiche;
+      const debut = performance.now();
+      const duree = 900;
+      const pas = (t: number) => {
+        const p = Math.min(1, (t - debut) / duree);
+        const e = 1 - Math.pow(1 - p, 4);
+        affiche = depuis + (vers - depuis) * e;
+        total.textContent = milliers(affiche);
+        if (p < 1) image = requestAnimationFrame(pas);
+      };
+      image = requestAnimationFrame(pas);
+    };
+
+    carte.addEventListener('change', (e) => {
+      const cible = e.target as HTMLInputElement;
+      if (cible.name !== 'repere') return;
+      const repere = cible.value;
+      carte.dataset.repere = repere;
+      trous.forEach((trou) => {
+        const d = Number(trou.dataset[repere]);
+        trou.style.setProperty('--d', String(d / plusLong));
+        const m = trou.querySelector('[data-m]');
+        if (m) m.textContent = String(d);
+      });
+      compter(totaux[repere]);
+      // La carte complète, si elle est sur la page, suit le même repère.
+      document.querySelectorAll<HTMLElement>('[data-carte-tableau]').forEach((t) => (t.dataset.repere = repere));
+    });
+
+    // Les drapeaux se dressent quand la carte entre dans la fenêtre.
+    if (!calme.matches && 'IntersectionObserver' in window) {
+      carte.classList.add('carte--couchee');
+      const io = new IntersectionObserver(
+        ([entree]) => {
+          if (!entree.isIntersecting) return;
+          carte.classList.remove('carte--couchee');
+          io.disconnect();
+        },
+        { threshold: 0.35 },
+      );
+      io.observe(carte.querySelector('.trous')!);
+    }
+  });
+</script>
+
+<style>
+  .carte {
+    --ciel: clamp(9rem, 22vw, 17rem);
+    --fanion: #ffffff;
+  }
+
+  .carte[data-repere='jaune'] {
+    --fanion: #f0c93d;
+  }
+  .carte[data-repere='bleu'] {
+    --fanion: #8dbcec;
+  }
+  .carte[data-repere='rouge'] {
+    --fanion: #ec7a72;
+  }
+
+  .carte__tete {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .carte__intro {
+    max-width: 34rem;
+  }
+
+  .carte__intro p {
+    margin-top: 1.6rem;
+    color: var(--sur-vert-2);
+  }
+
+  .carte__reglage {
+    display: grid;
+    gap: 2rem;
+    align-content: end;
+  }
+
+  .reperes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .repere {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.875rem;
+    padding: 0.5rem 1.1rem 0.5rem 0.9rem;
+    border: 1px solid var(--filet-vert);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color 0.35s var(--sortie),
+      border-color 0.35s var(--sortie),
+      color 0.35s var(--sortie);
+  }
+
+  .repere input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  @media (max-width: 29.99rem) {
+    .reperes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .repere__pastille {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 0 1px rgb(12 46 31 / 0.35);
+  }
+
+  .repere:has(input:checked) {
+    background: var(--sur-vert);
+    border-color: var(--sur-vert);
+    color: var(--vert-2);
+  }
+
+  .repere:has(input:focus-visible) {
+    outline: 2px solid var(--sur-vert);
+    outline-offset: 3px;
+  }
+
+  @media (hover: hover) {
+    .repere:not(:has(input:checked)):hover {
+      border-color: var(--sur-vert);
+    }
+  }
+
+  .carte__total {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .carte__metres {
+    font-family: var(--serif);
+    font-size: clamp(3.75rem, 2.4rem + 6vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums tabular-nums;
+    white-space: nowrap;
+  }
+
+  .carte__par {
+    color: var(--sur-vert-2);
+  }
+
+  /* ---------- Profil des dix-huit trous ---------- */
+
+  .profil {
+    display: grid;
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .profil__lignes {
+    display: none;
+  }
+
+  .trous {
+    --rang: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    row-gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .trou {
+    display: grid;
+    grid-template-rows: var(--ciel) repeat(3, var(--rang));
+    justify-items: center;
+    text-align: center;
+  }
+
+  .trou__ciel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Le mât : sa hauteur est la distance du trou. */
+  .trou__mat {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1px;
+    height: calc(var(--d) * 100%);
+    background: var(--sur-vert);
+    transform-origin: 50% 100%;
+    transition:
+      height 1.1s var(--sortie),
+      transform 1.1s var(--sortie);
+    transition-delay: calc(var(--i) * 28ms);
+  }
+
+  /* Le fanion prend la couleur des repères choisis. */
+  .trou__mat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: clamp(0.5rem, 1.1vw, 0.875rem);
+    aspect-ratio: 14 / 10;
+    background: var(--fanion);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transition: background-color 0.6s var(--sortie);
+    transition-delay: calc(var(--i) * 28ms);
+  }
+
+  .carte--couchee .trou__mat {
+    transform: scaleY(0);
+  }
+
+  .trou__n,
+  .trou__par,
+  .trou__m {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    border-top: 1px solid var(--filet-vert);
+    font-size: clamp(0.75rem, 0.6rem + 0.55vw, 0.9375rem);
+  }
+
+  .trou__n {
+    border-top-color: var(--sur-vert);
+    font-family: var(--serif);
+    font-size: clamp(1rem, 0.8rem + 0.8vw, 1.375rem);
+  }
+
+  .trou__par {
+    color: var(--sur-vert-2);
+  }
+
+  .trou__m {
+    border-bottom: 1px solid var(--filet-vert);
+    font-weight: 500;
+  }
+
+  .trou {
+    transition: opacity 0.4s var(--sortie);
+  }
+
+  @media (hover: hover) {
+    .trous:hover .trou:not(:hover) {
+      opacity: 0.4;
+    }
+  }
+
+  .carte__note {
+    margin-top: 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--sur-vert-2);
+  }
+
+  @media (min-width: 56rem) {
+    .carte__tete {
+      grid-template-columns: 5fr 6fr;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: end;
+    }
+  }
+
+  /* Grand écran : les dix-huit trous sur une seule ligne, comme sur la carte papier. */
+  @media (min-width: 64rem) {
+    .profil {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
+
+    .profil__lignes {
+      display: grid;
+      grid-template-rows: var(--ciel) repeat(3, 2.5rem);
+      font-size: 0.8125rem;
+      color: var(--sur-vert-2);
+    }
+
+    .profil__lignes span {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid var(--filet-vert);
+    }
+
+    .profil__lignes span:nth-child(1) {
+      grid-row: 2;
+      border-top-color: var(--sur-vert);
+    }
+
+    .profil__lignes span:nth-child(2) {
+      grid-row: 3;
+    }
+
+    .profil__lignes span:nth-child(3) {
+      grid-row: 4;
+      border-bottom: 1px solid var(--filet-vert);
+    }
+
+    .trous {
+      grid-template-columns: repeat(9, minmax(0, 1fr)) 1.75rem repeat(9, minmax(0, 1fr));
+    }
+
+    .trou:nth-child(10) {
+      grid-column-start: 11;
+    }
+
+    .carte__note {
+      display: none;
+    }
+  }
+</style>

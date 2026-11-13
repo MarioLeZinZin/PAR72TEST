@@ -1,0 +1,517 @@
+/* La Grande Romanie — système visuel
+   Blanc de craie, encre vert-noir, vert anglais en aplats,
+   bordeaux réservé à ce qui se presse (réserver). */
+
+:root {
+  --blanc: #fbfdfc;
+  --craie: #eef3f1;
+  --craie-2: #e1e8e5;
+  --encre: #14221b;
+  --encre-2: #47554d;
+  --filet: rgb(20 34 27 / 0.16);
+  --filet-fort: rgb(20 34 27 / 0.42);
+
+  --vert: #123f2b;
+  --vert-2: #0c2e1f;
+  --vert-vif: #00793b;
+  --sur-vert: #f4f7f2;
+  --sur-vert-2: #b9cfc1;
+  --filet-vert: rgb(244 247 242 / 0.22);
+
+  --bordeaux: #8e0021;
+  --bordeaux-2: #6d0019;
+  --sur-bordeaux: #fbf3f4;
+  --sur-bordeaux-2: #e9c3ca;
+
+  --serif: 'Libre Caslon Display', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --marge: clamp(1.25rem, 4.5vw, 4.5rem);
+  --large: 84rem;
+  --souffle: clamp(5.5rem, 11vw, 10.5rem);
+  --entete: 4.75rem;
+
+  --sortie: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--entete) + 1.5rem);
+  scrollbar-color: var(--vert) var(--craie);
+  background: var(--blanc);
+}
+
+body {
+  margin: 0;
+  background: var(--blanc);
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: clamp(1.0625rem, 0.98rem + 0.3vw, 1.1875rem);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  caret-color: var(--bordeaux);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--bordeaux);
+  color: var(--sur-bordeaux);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin: 0;
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 1.6rem + 5vw, 5.25rem);
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: clamp(2.125rem, 1.5rem + 2.6vw, 3.375rem);
+  line-height: 1.08;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+p + p {
+  margin-top: 1.1em;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bordeaux);
+  outline-offset: 4px;
+}
+
+.sur-vert :focus-visible,
+.sur-bordeaux :focus-visible,
+.pied :focus-visible {
+  outline-color: currentColor;
+}
+
+.hors-ecran {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.aller-au-contenu {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.1rem;
+  background: var(--encre);
+  color: var(--blanc);
+  transform: translateY(-200%);
+}
+
+.aller-au-contenu:focus {
+  transform: none;
+}
+
+/* ---------- Mise en page ---------- */
+
+.conteneur {
+  width: min(100% - 2 * var(--marge), var(--large));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--souffle);
+}
+
+.section--craie {
+  background: var(--craie);
+}
+
+.sur-vert {
+  background: var(--vert);
+  color: var(--sur-vert);
+}
+
+.sur-bordeaux {
+  background: var(--bordeaux);
+  color: var(--sur-bordeaux);
+}
+
+.texte {
+  max-width: 34rem;
+}
+
+.texte h2 + p,
+.texte h1 + p {
+  margin-top: 1.6rem;
+}
+
+.texte .lien {
+  margin-top: 2.2rem;
+}
+
+.insecable {
+  white-space: nowrap;
+}
+
+.attenue {
+  color: var(--encre-2);
+}
+
+/* ---------- Liens et boutons ---------- */
+
+.lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding-block: 0.45rem;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.5s var(--sortie);
+}
+
+.lien svg {
+  width: 1.05em;
+  height: 1.05em;
+  transition: transform 0.5s var(--sortie);
+}
+
+@media (hover: hover) {
+  .lien:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+
+  .lien:hover svg {
+    transform: translateX(0.3em);
+  }
+}
+
+.bouton {
+  --fond: var(--bordeaux);
+  --fond-survol: var(--bordeaux-2);
+  --texte: var(--sur-bordeaux);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  min-height: 3.25rem;
+  padding: 0.8rem 1.75rem;
+  border: 1px solid var(--fond);
+  background: var(--fond);
+  color: var(--texte);
+  font: 500 0.9375rem / 1.2 var(--sans);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.35s var(--sortie),
+    border-color 0.35s var(--sortie),
+    color 0.35s var(--sortie),
+    transform 0.2s var(--sortie);
+}
+
+.bouton svg {
+  width: 1em;
+  height: 1em;
+  flex: none;
+}
+
+@media (hover: hover) {
+  .bouton:hover {
+    background: var(--fond-survol);
+    border-color: var(--fond-survol);
+  }
+}
+
+.bouton:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Photographies cadrées ---------- */
+
+.cadre {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--craie-2);
+}
+
+.cadre img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.94) contrast(1.03);
+}
+
+/* Grain fin : adoucit l'agrandissement des photos d'archive. */
+.cadre::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+.cadre--paysage {
+  aspect-ratio: 3 / 2;
+}
+
+.cadre--portrait {
+  aspect-ratio: 2 / 3;
+}
+
+.cadre--large {
+  aspect-ratio: 16 / 9;
+}
+
+.legende {
+  margin-top: 0.9rem;
+  font-size: 0.8125rem;
+  color: var(--encre-2);
+}
+
+/* L'image se découvre à mesure qu'elle entre dans la fenêtre. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .cadre--devoile {
+      animation: devoiler linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+
+    .cadre--devoile img {
+      animation: desserrer linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+  }
+}
+
+@keyframes devoiler {
+  from {
+    clip-path: inset(9% 7% 0 7%);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes desserrer {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ---------- Duos texte + image ---------- */
+
+.duo {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+
+@media (min-width: 56rem) {
+  .duo {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+
+  .duo > .duo__texte {
+    grid-column: 1 / span 5;
+  }
+
+  .duo > .duo__image {
+    grid-column: 7 / span 6;
+  }
+
+  .duo--inverse > .duo__texte {
+    grid-column: 8 / span 5;
+    grid-row: 1;
+  }
+
+  .duo--inverse > .duo__image {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
+}
+
+/* ---------- En-tête de page intérieure ---------- */
+
+.titre-page {
+  padding-top: clamp(3.5rem, 8vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.titre-page p {
+  max-width: 38rem;
+  margin: 1.75rem auto 0;
+  color: var(--encre-2);
+  font-size: 1.125em;
+}
+
+/* ---------- Tableaux ---------- */
+
+.tableau-defile {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.tableau {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 0.9375rem;
+}
+
+.tableau caption {
+  text-align: left;
+  padding-bottom: 1.25rem;
+  font-family: var(--serif);
+  font-size: 1.625rem;
+  line-height: 1.15;
+}
+
+.tableau th,
+.tableau td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--filet);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tableau th:first-child,
+.tableau td:first-child {
+  text-align: left;
+  padding-left: 0;
+}
+
+.tableau th:last-child,
+.tableau td:last-child {
+  padding-right: 0;
+}
+
+.tableau thead th {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: var(--encre-2);
+  border-bottom-color: var(--filet-fort);
+  vertical-align: bottom;
+  white-space: normal;
+}
+
+.tableau tbody th {
+  font-weight: 400;
+}
+
+.tableau tfoot th,
+.tableau tfoot td {
+  font-weight: 600;
+  border-bottom: 0;
+  border-top: 1px solid var(--filet-fort);
+}
+
+/* ---------- Texte courant des articles ---------- */
+
+.prose {
+  max-width: 40rem;
+}
+
+.prose > * + * {
+  margin-top: 1.2em;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  margin-top: 2em;
+}
+
+.prose a {
+  text-decoration-color: var(--vert-vif);
+}
+
+.prose ul {
+  padding-left: 1.1em;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--vert-vif);
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

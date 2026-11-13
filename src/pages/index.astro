@@ -1,0 +1,365 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CarteScore from '../components/CarteScore.astro';
+import Competitions from '../components/Competitions.astro';
+import Actualite from '../components/Actualite.astro';
+import Fleche from '../components/Fleche.astro';
+import { site } from '../data/site';
+
+import blason from '../assets/blason.png';
+import aerienGreen from '../assets/photos/aerien-green.jpg';
+import aerienFairway from '../assets/photos/aerien-fairway.jpg';
+import lavande from '../assets/photos/lavande.jpg';
+import clubHouse from '../assets/photos/club-house.jpg';
+
+const actualites = (await getCollection('actualites'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base accueil>
+  <section class="ouverture">
+    <div class="ouverture__marque">
+      <Image src={blason} alt="" width={84} densities={[1, 2, 3]} loading="eager" />
+      <p>
+        <span>{site.nom}</span>
+        <span>{site.baseline}</span>
+      </p>
+    </div>
+
+    <h1>Un links en Champagne</h1>
+
+    <div class="ouverture__scene">
+      <figure class="cadre ouverture__photo">
+        <Image
+          src={aerienGreen}
+          alt="Vue aérienne d’un green de la Grande Romanie, gardé par trois bunkers de sable clair"
+          widths={[661]}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
+      <a class="bouton ouverture__reserver" href={site.reservation} target="_blank" rel="noopener">
+        Réserver un départ
+        <Fleche sortante />
+      </a>
+    </div>
+
+    <p class="ouverture__reperes">
+      18 trous <span aria-hidden="true">·</span> Par 72 <span aria-hidden="true">·</span> Courtisols, à quinze minutes
+      de Châlons-en-Champagne
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="conteneur duo">
+      <div class="duo__texte texte">
+        <h2>Un air d’Écosse sur la craie champenoise</h2>
+        <p>
+          Niché au cœur de la Champagne crayeuse, le Golf de la Grande Romanie a été créé en 1987, dans un cadre qui
+          rappelle les links écossais dont il s’inspire.
+        </p>
+        <p class="attenue">
+          Son sous-sol calcaire le rend jouable toute l’année, et ses dix-huit trous restent accessibles à tous les
+          niveaux&nbsp;: trompe-l’œil, greens surélevés, larges fairways et bunkers en nombre.
+        </p>
+        <a class="lien" href="/parcours">Découvrir le parcours <Fleche /></a>
+      </div>
+
+      <div class="duo__image accroche">
+        <figure class="cadre cadre--portrait cadre--devoile accroche__grande">
+          <Image
+            src={aerienFairway}
+            alt="Vue aérienne d’un fairway vallonné et de ses bunkers, dans la lumière du soir"
+            widths={[439]}
+          />
+        </figure>
+        <figure class="cadre cadre--paysage accroche__petite">
+          <Image src={lavande} alt="Un drapeau rouge derrière un massif de lavande en fleur" widths={[400, 700]} sizes="18rem" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sur-vert" aria-label="Carte de score">
+    <div class="conteneur">
+      <CarteScore />
+      <p class="apres-carte">
+        <a class="lien" href="/parcours#carte">Voir la carte de score complète et les green-fees <Fleche /></a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="conteneur duo duo--inverse">
+      <div class="duo__texte texte">
+        <h2>Le 19<sup>e</sup> trou</h2>
+        <p>
+          Au club-house, toute l’équipe du bar-restaurant veille à ce que le 19<sup>e</sup> trou soit aussi sympathique
+          que les dix-huit précédents.
+        </p>
+        <p class="attenue">
+          En cuisine, Alexis prépare ses plats du mardi au dimanche, avec une carte complète de l’entrée au dessert, des
+          vins et des champagnes pour tous les budgets.
+        </p>
+        <a class="lien" href="/restaurant">Découvrir le bar-restaurant <Fleche /></a>
+      </div>
+      <figure class="duo__image cadre cadre--devoile terrasse">
+        <Image
+          src={clubHouse}
+          alt="La terrasse du club-house et ses tables, au bord du green d’entraînement"
+          widths={[660]}
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--craie">
+    <div class="conteneur agenda">
+      <div class="texte">
+        <h2>Prochaines compétitions</h2>
+        <p class="attenue">Inscription à l’accueil du club ou au {site.telephone}.</p>
+        <a class="lien" href="/competitions">Tout le calendrier <Fleche /></a>
+      </div>
+      <Competitions limite={3} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="conteneur">
+      <div class="nouvelles__tete">
+        <h2>Les nouvelles du club</h2>
+        <a class="lien" href="/actualites">Toutes les actualités <Fleche /></a>
+      </div>
+      <div class="nouvelles">
+        {actualites.map((article) => <Actualite article={article} />)}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Première fenêtre ---------- */
+
+  .ouverture {
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    text-align: center;
+  }
+
+  .ouverture__marque {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+  }
+
+  .ouverture__marque img {
+    width: clamp(3.5rem, 6vw, 4.75rem);
+    height: auto;
+  }
+
+  .ouverture__marque p {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .ouverture__marque span:first-child {
+    font-family: var(--serif);
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .ouverture__marque span:last-child {
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--encre-2);
+  }
+
+  .ouverture h1 {
+    margin-top: clamp(2rem, 4.5vw, 3.5rem);
+    padding-inline: var(--marge);
+  }
+
+  .ouverture__scene {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(2.25rem, 4.5vw, 3.75rem);
+    padding-inline: var(--marge);
+  }
+
+  .ouverture__photo {
+    position: relative;
+    width: min(100%, 60rem);
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Le bouton reste en bas de la fenêtre tant que la photo défile,
+     puis se pose à cheval sur son bord bas. */
+  .ouverture__reserver {
+    position: sticky;
+    bottom: 1.75rem;
+    z-index: 2;
+    margin-top: -1.625rem;
+    box-shadow: 0 1rem 2.25rem -1rem rgb(20 34 27 / 0.55);
+  }
+
+  .ouverture__reperes {
+    margin-top: 1.75rem;
+    padding-inline: var(--marge);
+    font-size: 0.875rem;
+    color: var(--encre-2);
+  }
+
+  .ouverture__reperes span {
+    margin-inline: 0.5em;
+    color: var(--vert-vif);
+  }
+
+  @media (max-width: 47.99rem) {
+    .ouverture__photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+    }
+
+    .ouverture__reserver {
+      display: none;
+    }
+
+  }
+
+  /* L'entrée en scène : un seul moment, à l'arrivée. */
+  @media (prefers-reduced-motion: no-preference) {
+    .ouverture__marque,
+    .ouverture h1,
+    .ouverture__reperes {
+      animation: paraitre 1.2s var(--sortie) both;
+    }
+
+    .ouverture h1 {
+      animation-delay: 0.12s;
+    }
+
+    .ouverture__photo {
+      animation: lever 1.5s var(--sortie) 0.25s both;
+    }
+
+    .ouverture__photo :global(img) {
+      animation: desserrer 2.2s var(--sortie) 0.25s both;
+    }
+
+    .ouverture__reperes {
+      animation-delay: 1.1s;
+    }
+  }
+
+  @keyframes paraitre {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  @keyframes lever {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0);
+    }
+  }
+
+  /* ---------- Deux images accrochées ---------- */
+
+  .accroche {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: end;
+  }
+
+  .accroche__grande {
+    grid-column: 2 / -1;
+    grid-row: 1;
+  }
+
+  .accroche__petite {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    z-index: 1;
+    margin-bottom: -2.5rem;
+    box-shadow: 0 0 0 0.625rem var(--blanc);
+  }
+
+  /* Le club-house : cadré sur le bâtiment et la terrasse plutôt que sur la pelouse. */
+  .terrasse {
+    aspect-ratio: 2 / 1;
+  }
+
+  .terrasse :global(img) {
+    object-position: 50% 12%;
+  }
+
+  h2 sup {
+    font-size: 0.5em;
+    vertical-align: 0.75em;
+    line-height: 0;
+  }
+
+  .apres-carte {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* ---------- Compétitions ---------- */
+
+  .agenda {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 80rem) {
+    .agenda {
+      grid-template-columns: 4fr 7fr;
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+  }
+
+  /* ---------- Actualités ---------- */
+
+  .nouvelles__tete {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+  }
+
+  .nouvelles {
+    display: grid;
+    gap: 3rem clamp(1.5rem, 2.5vw, 2.5rem);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 40rem) {
+    .nouvelles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .nouvelles {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    /* Accrochage décalé plutôt que rangée alignée. */
+    .nouvelles > :global(:nth-child(2)) {
+      margin-top: 4.5rem;
+    }
+  }
+</style>

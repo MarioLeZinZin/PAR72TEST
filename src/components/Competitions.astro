@@ -1,0 +1,161 @@
+---
+// Liste de compétitions. Le tri « à venir / passées » est refait dans le navigateur
+// pour rester juste entre deux mises à jour du site.
+import { getCollection } from 'astro:content';
+import { dates } from '../data/site';
+
+interface Props {
+  mode?: 'a-venir' | 'passees';
+  limite?: number;
+}
+
+const { mode = 'a-venir', limite } = Astro.props;
+const toutes = (await getCollection('competitions')).sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const liste = mode === 'passees' ? [...toutes].reverse() : toutes;
+const aujourdhui = dates.iso(new Date());
+let visibles = 0;
+---
+
+<div class="competitions" data-competitions={mode} data-limite={limite}>
+  <ol>
+    {
+      liste.map((c) => {
+        const iso = dates.iso(c.data.date);
+        const bonMode = mode === 'a-venir' ? iso >= aujourdhui : iso < aujourdhui;
+        const montre = bonMode && (!limite || visibles < limite);
+        if (montre) visibles++;
+        return (
+          <li data-date={iso} hidden={!montre}>
+            <time datetime={iso}>
+              <span class="competitions__jour">{dates.jour(c.data.date)}</span>
+              <span class="competitions__mois">
+                {dates.mois(c.data.date)} {c.data.date.getUTCFullYear()}
+                <span>{dates.semaine(c.data.date)}</span>
+              </span>
+            </time>
+            <div>
+              <h3>{c.data.title}</h3>
+              {c.data.infos && <p class="competitions__infos">{c.data.infos}</p>}
+            </div>
+            <p class="competitions__type">{c.data.type}</p>
+          </li>
+        );
+      })
+    }
+  </ol>
+  <p class="competitions__vide" data-vide hidden={visibles > 0}>
+    {
+      mode === 'a-venir'
+        ? 'Le calendrier des prochaines compétitions sera publié ici très bientôt.'
+        : 'Aucune compétition passée à afficher pour le moment.'
+    }
+  </p>
+</div>
+
+<script>
+  const maintenant = new Date();
+  const iso = [
+    maintenant.getFullYear(),
+    String(maintenant.getMonth() + 1).padStart(2, '0'),
+    String(maintenant.getDate()).padStart(2, '0'),
+  ].join('-');
+
+  document.querySelectorAll<HTMLElement>('[data-competitions]').forEach((bloc) => {
+    const aVenir = bloc.dataset.competitions === 'a-venir';
+    const limite = Number(bloc.dataset.limite) || Infinity;
+    let visibles = 0;
+    bloc.querySelectorAll<HTMLElement>('[data-date]').forEach((ligne) => {
+      const future = ligne.dataset.date! >= iso;
+      const montre = (aVenir ? future : !future) && visibles < limite;
+      ligne.hidden = !montre;
+      if (montre) visibles++;
+    });
+    const vide = bloc.querySelector<HTMLElement>('[data-vide]');
+    if (vide) vide.hidden = visibles > 0;
+    bloc.dispatchEvent(new CustomEvent('competitions:triees', { bubbles: true, detail: { visibles } }));
+  });
+</script>
+
+<style>
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--filet-fort);
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--filet);
+  }
+
+  li[hidden] {
+    display: none;
+  }
+
+  time {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .competitions__jour {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 2.4rem + 2.4vw, 4.25rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums;
+    min-width: 1.6ch;
+  }
+
+  .competitions__mois {
+    display: grid;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .competitions__mois span {
+    font-weight: 400;
+    color: var(--encre-2);
+  }
+
+  .competitions__mois::first-letter,
+  .competitions__mois span::first-letter {
+    text-transform: uppercase;
+  }
+
+  .competitions__infos {
+    margin-top: 0.4rem;
+    color: var(--encre-2);
+    font-size: 0.9375rem;
+    max-width: 32rem;
+  }
+
+  .competitions__type {
+    font-size: 0.875rem;
+    color: var(--vert-vif);
+    font-weight: 500;
+  }
+
+  .competitions__vide {
+    padding-block: 2rem;
+    border-bottom: 1px solid var(--filet);
+    color: var(--encre-2);
+  }
+
+  @media (min-width: 44rem) {
+    li {
+      grid-template-columns: 13.5rem minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .competitions__type {
+      text-align: right;
+    }
+  }
+</style>

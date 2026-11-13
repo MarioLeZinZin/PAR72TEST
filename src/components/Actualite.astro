@@ -1,0 +1,113 @@
+---
+// Une actualité dans une liste : l'affiche est présentée entière, comme sous passe-partout.
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { dates, sansDate } from '../data/site';
+
+interface Props {
+  article: CollectionEntry<'actualites'>;
+}
+
+const { article } = Astro.props;
+const { title, date, image } = article.data;
+---
+
+<article class="actu">
+  <a href={`/actualites/${sansDate(article.id)}`}>
+    {
+      image ? (
+        <>
+          <div class="actu__passe-partout">
+            <Image src={image} alt="" widths={[360, 720]} sizes="(min-width: 56rem) 26vw, 80vw" />
+          </div>
+          <time datetime={dates.iso(date)}>{dates.complet(date)}</time>
+          <h3>{title}</h3>
+        </>
+      ) : (
+        <>
+          <div class="actu__passe-partout actu__passe-partout--texte">
+            <h3>{title}</h3>
+          </div>
+          <time datetime={dates.iso(date)}>{dates.complet(date)}</time>
+        </>
+      )
+    }
+  </a>
+</article>
+
+<style>
+  .actu a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .actu__passe-partout {
+    --pp: clamp(1.25rem, 3vw, 2.25rem);
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--craie);
+    overflow: hidden;
+    transition: background-color 0.6s var(--sortie);
+  }
+
+  /* L'affiche est toujours montrée entière, centrée dans sa marge. */
+  .actu__passe-partout :global(img) {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: auto;
+    height: auto;
+    max-width: calc(100% - 2 * var(--pp));
+    max-height: calc(100% - 2 * var(--pp));
+    box-shadow: 0 1.25rem 2.5rem -1.25rem rgb(20 34 27 / 0.45);
+    transition: transform 0.9s var(--sortie);
+  }
+
+  .actu__passe-partout--texte {
+    display: grid;
+    align-items: end;
+    padding: var(--pp);
+    background: var(--vert);
+    color: var(--sur-vert);
+  }
+
+  .actu__passe-partout--texte h3 {
+    margin: 0;
+    font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+    line-height: 1.08;
+    background: none;
+    display: block;
+  }
+
+  time {
+    display: block;
+    margin-top: 1.25rem;
+    font-size: 0.8125rem;
+    color: var(--encre-2);
+  }
+
+  h3 {
+    margin-top: 0.4rem;
+    max-width: 22ch;
+  }
+
+  h3 {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    display: inline;
+    transition: background-size 0.6s var(--sortie);
+  }
+
+  @media (hover: hover) {
+    .actu a:hover .actu__passe-partout:not(.actu__passe-partout--texte) {
+      background: var(--craie-2);
+    }
+
+    .actu a:hover :global(img) {
+      transform: scale(1.03);
+    }
+
+    .actu a:hover h3 {
+      background-size: 100% 1px;
+    }
+  }
+</style>

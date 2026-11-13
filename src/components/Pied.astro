@@ -1,0 +1,164 @@
+---
+import { Image } from 'astro:assets';
+import blason from '../assets/blason.png';
+import { site, rubriques } from '../data/site';
+---
+
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied__haut">
+      <a class="pied__marque" href="/" aria-label={`${site.nom}, accueil`}>
+        <Image src={blason} alt="" width={72} densities={[1, 2, 3]} />
+        <span>
+          <span class="pied__nom">{site.nom}</span>
+          <span class="pied__baseline">{site.baseline}</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="pied__colonnes">
+      <div>
+        <h2>Nous trouver</h2>
+        <address>
+          {site.adresse.map((ligne) => <span>{ligne}</span>)}
+        </address>
+        <p><a href={site.itineraire} target="_blank" rel="noopener">Voir sur la carte</a></p>
+      </div>
+      <div>
+        <h2>Accueil et club-house</h2>
+        <p><a class="pied__tel" href={site.telephoneLien}>{site.telephone}</a></p>
+        <ul>
+          {site.horaires.map((h) => <li>{h}</li>)}
+        </ul>
+      </div>
+      <nav aria-label="Pied de page">
+        <h2>Le club</h2>
+        <ul>
+          {rubriques.map((r) => <li><a href={r.href}>{r.titre}</a></li>)}
+        </ul>
+      </nav>
+      <div>
+        <h2>Réserver</h2>
+        <ul>
+          <li><a href={site.reservation} target="_blank" rel="noopener">Visiteurs&nbsp;: Grip Resa</a></li>
+          <li><a href={site.reservationMembres} target="_blank" rel="noopener">Membres&nbsp;: Net Golf</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pied__bas">
+      <p>© {new Date().getFullYear()} Par72, Golf de la Grande Romanie. Photographies&nbsp;: Par72.</p>
+      <p><a href="/mentions-legales">Mentions légales</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    background: var(--vert-2);
+    color: var(--sur-vert);
+    padding-top: clamp(4rem, 8vw, 6.5rem);
+    padding-bottom: calc(2rem + var(--barre-mobile, 0px));
+    font-size: 0.9375rem;
+  }
+
+  .pied a {
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.5s var(--sortie);
+  }
+
+  @media (hover: hover) {
+    .pied a:hover {
+      background-size: 100% 1px;
+    }
+  }
+
+  .pied__marque {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: none !important;
+  }
+
+  .pied__marque img {
+    width: 3.5rem;
+    height: auto;
+  }
+
+  .pied__nom {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(1.375rem, 1.1rem + 1.2vw, 1.875rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .pied__baseline {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--sur-vert-2);
+  }
+
+  /* Bloc réglé serré, comme le générique au pied d'une affiche. */
+  .pied__colonnes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--filet-vert);
+  }
+
+  .pied__colonnes > * {
+    padding: 1.75rem 1.5rem 2rem 0;
+    border-bottom: 1px solid var(--filet-vert);
+  }
+
+  .pied h2 {
+    font: 500 0.8125rem / 1.4 var(--sans);
+    letter-spacing: 0.02em;
+    color: var(--sur-vert-2);
+    margin-bottom: 0.9rem;
+  }
+
+  .pied address {
+    font-style: normal;
+    display: grid;
+  }
+
+  .pied ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .pied p + p,
+  .pied address + p,
+  .pied p + ul {
+    margin-top: 0.6rem;
+  }
+
+  .pied__tel {
+    font-family: var(--serif);
+    font-size: 1.625rem;
+    line-height: 1.1;
+    font-variant-numeric: lining-nums;
+    white-space: nowrap;
+  }
+
+  .pied__bas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1.75rem;
+    font-size: 0.8125rem;
+    color: var(--sur-vert-2);
+  }
+
+  .pied__bas p + p {
+    margin-top: 0;
+  }
+</style>

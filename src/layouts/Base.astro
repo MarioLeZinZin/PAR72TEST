@@ -1,0 +1,138 @@
+---
+import '@fontsource/libre-caslon-display/400.css';
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '../styles/global.css';
+import Entete from '../components/Entete.astro';
+import Pied from '../components/Pied.astro';
+import Reserver from '../components/Reserver.astro';
+import Fleche from '../components/Fleche.astro';
+import { site } from '../data/site';
+
+interface Props {
+  titre?: string;
+  description?: string;
+  accueil?: boolean;
+}
+
+const {
+  titre,
+  description = 'Golf de la Grande Romanie, à Courtisols près de Châlons-en-Champagne : un links de 18 trous, par 72, jouable toute l’année. Parcours, bar-restaurant, compétitions et réservation des départs.',
+  accueil = false,
+} = Astro.props;
+
+const titreComplet = titre ? `${titre} · ${site.nom}` : `${site.nom} · ${site.baseline}`;
+---
+
+<!doctype html>
+<html lang="fr" class:list={[{ accueil }]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titreComplet}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fbfdfc" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="aller-au-contenu" href="#contenu">Aller au contenu</a>
+    <Entete />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Reserver />
+    <Pied />
+
+    <a class="barre-mobile" href={site.reservation} target="_blank" rel="noopener">
+      Réserver un départ
+      <Fleche sortante />
+    </a>
+
+    <script>
+      const racine = document.documentElement;
+
+      // La barre gagne un filet dès qu'on quitte le haut de page.
+      const seuil = () => (racine.classList.contains('accueil') ? 260 : 8);
+      const surDefilement = () => racine.classList.toggle('a-defile', window.scrollY > seuil());
+      surDefilement();
+      window.addEventListener('scroll', surDefilement, { passive: true });
+
+      // Menu plein écran.
+      const bouton = document.querySelector<HTMLButtonElement>('[data-menu-bouton]');
+      const menu = document.querySelector<HTMLElement>('[data-menu]');
+      const libelle = document.querySelector<HTMLElement>('[data-menu-libelle]');
+
+      const basculer = (ouvert: boolean) => {
+        if (!bouton || !menu) return;
+        menu.hidden = !ouvert;
+        bouton.setAttribute('aria-expanded', String(ouvert));
+        if (libelle) libelle.textContent = ouvert ? 'Fermer' : 'Menu';
+        racine.classList.toggle('menu-ouvert', ouvert);
+      };
+
+      bouton?.addEventListener('click', () => basculer(bouton.getAttribute('aria-expanded') !== 'true'));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && bouton?.getAttribute('aria-expanded') === 'true') {
+          basculer(false);
+          bouton.focus();
+        }
+      });
+      window.matchMedia('(min-width: 72rem)').addEventListener('change', (e) => e.matches && basculer(false));
+    </script>
+
+    <style is:global>
+      html.menu-ouvert {
+        overflow: hidden;
+      }
+
+      /* Réserver reste sous le pouce sur téléphone. */
+      .barre-mobile {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7em;
+        min-height: 3.5rem;
+        padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+        background: var(--bordeaux);
+        color: var(--sur-bordeaux);
+        font-weight: 500;
+        font-size: 1rem;
+        text-decoration: none;
+      }
+
+      .barre-mobile svg {
+        width: 1em;
+        height: 1em;
+      }
+
+      .barre-mobile:active {
+        background: var(--bordeaux-2);
+      }
+
+      :root {
+        --barre-mobile: calc(3.5rem + env(safe-area-inset-bottom));
+      }
+
+      @media (min-width: 48rem) {
+        .barre-mobile {
+          display: none;
+        }
+
+        :root {
+          --barre-mobile: 0px;
+        }
+      }
+    </style>
+  </body>
+</html>

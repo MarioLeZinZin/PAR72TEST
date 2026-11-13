@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Fleche from '../components/Fleche.astro';
+---
+
+<Base titre="Page introuvable">
+  <div class="conteneur titre-page perdue">
+    <h1>Balle perdue</h1>
+    <p>Cette page est hors limites, ou elle a changé d’adresse avec le nouveau site.</p>
+    <a class="lien" href="/">Revenir à l’accueil <Fleche /></a>
+  </div>
+</Base>
+
+<style>
+  .perdue {
+    padding-bottom: var(--souffle);
+  }
+
+  .perdue .lien {
+    margin-top: 2.5rem;
+  }
+</style>

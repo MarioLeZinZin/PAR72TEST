@@ -1,0 +1,95 @@
+# Espace du club : deux écrans seulement, tout en français.
+# En production, le mode de connexion (backend) se règle avec l'hébergeur choisi.
+backend:
+  name: git-gateway
+  branch: main
+
+# Pour essayer en local : `npm run club` (lance le site et le serveur du back-office),
+# puis ouvrir http://localhost:4321/admin
+local_backend: true
+
+locale: fr
+logo_url: /favicon.png
+media_folder: src/assets/actualites
+public_folder: ../../assets/actualites
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: actualites
+    label: Actualités
+    label_singular: Nouvelle actualité
+    description: >
+      Les nouvelles du club. Cliquez sur « Nouvelle actualité », remplissez le titre et le texte,
+      puis cliquez sur « Publier » en haut de l'écran.
+    folder: src/content/actualites
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    summary: "{{title}}, le {{date | date('DD/MM/YYYY')}}"
+    sortable_fields: [date, title]
+    editor:
+      preview: false
+    fields:
+      - label: Titre
+        name: title
+        widget: string
+        hint: 'Exemple : « Soirée Beaujolais nouveau au club-house »'
+      - label: Date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: DD/MM/YYYY
+        time_format: false
+        default: '{{now}}'
+        hint: La date affichée sur le site. Par défaut, aujourd'hui.
+      - label: Photo ou affiche
+        name: image
+        widget: image
+        required: false
+        hint: Facultatif. Cliquez pour choisir une image sur votre ordinateur.
+      - label: Texte
+        name: body
+        widget: markdown
+        required: false
+        modes: [rich_text]
+        buttons: [bold, italic, link, bulleted-list]
+        editor_components: []
+        hint: Écrivez votre texte ici, comme dans un courriel.
+
+  - name: competitions
+    label: Compétitions
+    label_singular: Nouvelle compétition
+    description: >
+      Le calendrier des compétitions. Les compétitions passées se rangent toutes seules :
+      il n'y a rien à supprimer.
+    folder: src/content/competitions
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    summary: "{{date | date('DD/MM/YYYY')}} : {{title}}"
+    sortable_fields: [date, title]
+    editor:
+      preview: false
+    fields:
+      - label: Nom de la compétition
+        name: title
+        widget: string
+        hint: 'Exemple : « La November Cup »'
+      - label: Date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: DD/MM/YYYY
+        time_format: false
+        hint: Le jour de la compétition.
+      - label: Qui peut participer ?
+        name: type
+        widget: select
+        options: ['Compétition ouverte', 'Réservée aux membres']
+        default: 'Compétition ouverte'
+      - label: Précisions
+        name: infos
+        widget: text
+        required: false
+        hint: 'Facultatif. Exemple : « Scramble à deux, départs en shotgun à 9 h. »'

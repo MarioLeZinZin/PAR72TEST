@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Fleche from '../../components/Fleche.astro';
+import { dates, sansDate } from '../../data/site';
+
+export async function getStaticPaths() {
+  const actualites = await getCollection('actualites');
+  return actualites.map((article) => ({ params: { slug: sansDate(article.id) }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { title, date, image } = article.data;
+const { Content } = await render(article);
+---
+
+<Base titre={title}>
+  <article class="conteneur article">
+    <header>
+      <time datetime={dates.iso(date)}>{dates.complet(date)}</time>
+      <h1>{title}</h1>
+    </header>
+
+    <div class:list={['article__corps', { 'article__corps--seul': !image }]}>
+      {
+        image && (
+          <div class="article__affiche">
+            <Image src={image} alt="" widths={[520, 1040]} sizes="(min-width: 56rem) 34rem, 90vw" loading="eager" />
+          </div>
+        )
+      }
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+
+    <p class="article__retour">
+      <a class="lien lien--retour" href="/actualites"><Fleche /> Toutes les actualités</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .article {
+    padding-top: clamp(3.5rem, 8vw, 7rem);
+    padding-bottom: var(--souffle);
+  }
+
+  header {
+    max-width: 56rem;
+  }
+
+  time {
+    display: block;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--encre-2);
+  }
+
+  h1 {
+    font-size: clamp(2.375rem, 1.5rem + 3.6vw, 4.25rem);
+    line-height: 1.04;
+  }
+
+  .article__corps {
+    display: grid;
+    gap: 3rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .article__affiche {
+    display: grid;
+    place-items: center;
+    padding: clamp(1.25rem, 3.5vw, 2.75rem);
+    background: var(--craie);
+  }
+
+  .article__affiche :global(img) {
+    max-height: 44rem;
+    width: auto;
+    box-shadow: 0 1.5rem 3rem -1.5rem rgb(20 34 27 / 0.45);
+  }
+
+  @media (min-width: 56rem) {
+    .article__corps {
+      grid-template-columns: 6fr 5fr;
+      gap: clamp(3rem, 6vw, 6rem);
+    }
+
+    .article__corps--seul {
+      grid-template-columns: minmax(0, 40rem);
+    }
+
+    .article__affiche {
+      position: sticky;
+      top: calc(var(--entete) + 2rem);
+    }
+  }
+
+  .article__retour {
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--filet);
+  }
+
+  .lien--retour :global(svg) {
+    transform: rotate(180deg);
+  }
+
+  @media (hover: hover) {
+    .lien--retour:hover :global(svg) {
+      transform: rotate(180deg) translateX(0.3em);
+    }
+  }
+</style>

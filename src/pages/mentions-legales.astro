@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base titre="Mentions légales">
+  <div class="conteneur page">
+    <h1>Mentions légales</h1>
+    <div class="prose">
+      <h2>Éditeur du site</h2>
+      <p>
+        Ce site est exploité par la société Par72, SA au capital de 144&nbsp;826&nbsp;€, immatriculée sous le numéro
+        344&nbsp;991&nbsp;526&nbsp;00015.
+      </p>
+      <p>Par72, {site.adresse.join(', ')}. Téléphone&nbsp;: {site.telephone}.</p>
+      <p>Directeur de la publication&nbsp;: M. Joël Gibeaux, président du conseil d’administration.</p>
+
+      <h2>Hébergement</h2>
+      <p>Les coordonnées de l’hébergeur seront indiquées ici dès la mise en ligne du site.</p>
+
+      <h2>Crédits</h2>
+      <p>Photographies&nbsp;: Par72.</p>
+
+      <h2>Données personnelles</h2>
+      <p>
+        Ce site ne dépose aucun cookie de mesure d’audience ni de publicité, et ne collecte aucune donnée personnelle.
+        La réservation des départs se fait sur des plateformes tierces (Grip Resa et Net Golf), qui appliquent leur
+        propre politique de confidentialité.
+      </p>
+      <p>
+        Pour toute question, ou pour exercer vos droits d’accès, de rectification et de suppression, écrivez à Par72,
+        {site.adresse.join(', ')}.
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: clamp(3.5rem, 8vw, 7rem);
+    padding-bottom: var(--souffle);
+  }
+
+  h1 {
+    font-size: clamp(2.375rem, 1.5rem + 3.6vw, 4.25rem);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+</style>
