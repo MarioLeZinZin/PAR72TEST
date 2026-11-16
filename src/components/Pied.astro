@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import blason from '../assets/blason.png';
+import Fleche from './Fleche.astro';
 import { site, rubriques } from '../data/site';
 ---
 
@@ -22,7 +23,7 @@ import { site, rubriques } from '../data/site';
         <address>
           {site.adresse.map((ligne) => <span>{ligne}</span>)}
         </address>
-        <p><a href={site.itineraire} target="_blank" rel="noopener">Voir sur la carte</a></p>
+        <p><a href={site.carte.fiche} target="_blank" rel="noopener" data-itineraire>Voir sur la carte</a></p>
       </div>
       <div>
         <h2>Accueil et club-house</h2>
@@ -53,7 +54,139 @@ import { site, rubriques } from '../data/site';
   </div>
 </footer>
 
+<!-- Sur mobile, « Voir sur la carte » propose l'application de guidage. -->
+<dialog class="cartes" data-cartes aria-labelledby="cartes-titre">
+  <div class="cartes__contenu">
+    <h2 id="cartes-titre">Ouvrir l’itinéraire avec</h2>
+    <p class="cartes__lieu">{site.nom}, {site.adresse[1]}</p>
+    <ul>
+      <li><a href={site.carte.googleMaps} target="_blank" rel="noopener">Google Maps <Fleche sortante /></a></li>
+      <li><a href={site.carte.waze} target="_blank" rel="noopener">Waze <Fleche sortante /></a></li>
+      <li data-plans><a href={site.carte.plans} target="_blank" rel="noopener">Plans <Fleche sortante /></a></li>
+    </ul>
+    <button type="button" data-fermer>Annuler</button>
+  </div>
+</dialog>
+
+<script>
+  const dialogue = document.querySelector<HTMLDialogElement>('[data-cartes]');
+  const tactile = window.matchMedia('(hover: none) and (pointer: coarse)');
+
+  if (dialogue && typeof dialogue.showModal === 'function') {
+    // Plans n'existe que sur les appareils Apple (l'iPad se présente comme un Mac tactile).
+    const ua = navigator.userAgent;
+    const apple = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const plans = dialogue.querySelector<HTMLElement>('[data-plans]');
+    if (plans) plans.hidden = !apple;
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-itineraire]').forEach((lien) => {
+      lien.addEventListener('click', (e) => {
+        if (!tactile.matches) return; // ordinateur : le lien ouvre Google Maps
+        e.preventDefault();
+        dialogue.showModal();
+      });
+    });
+
+    // Se ferme au choix d'une application, sur « Annuler » ou en touchant le fond.
+    dialogue.addEventListener('click', (e) => {
+      const cible = e.target as HTMLElement;
+      if (cible === dialogue || cible.closest('a, [data-fermer]')) dialogue.close();
+    });
+  }
+</script>
+
 <style>
+  .cartes {
+    width: 100%;
+    max-width: 30rem;
+    margin: auto auto 0;
+    padding: 0;
+    border: 0;
+    background: var(--blanc);
+    color: var(--encre);
+  }
+
+  .cartes::backdrop {
+    background: rgb(12 46 31 / 0.6);
+  }
+
+  .cartes__contenu {
+    padding: 1.75rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .cartes h2 {
+    font-size: 1.75rem;
+    line-height: 1.15;
+  }
+
+  .cartes__lieu {
+    margin-top: 0.4rem;
+    font-size: 0.9375rem;
+    color: var(--encre-2);
+  }
+
+  .cartes ul {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    border-top: 1px solid var(--filet-fort);
+  }
+
+  .cartes [hidden] {
+    display: none;
+  }
+
+  .cartes li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.75rem;
+    border-bottom: 1px solid var(--filet);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .cartes li a :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    color: var(--encre-2);
+  }
+
+  .cartes button {
+    width: 100%;
+    min-height: 3.25rem;
+    margin-top: 1.25rem;
+    border: 1px solid var(--filet-fort);
+    background: none;
+    color: inherit;
+    font: 500 0.9375rem / 1.2 var(--sans);
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cartes[open] {
+      animation: cartes-monter 0.5s var(--sortie);
+    }
+
+    .cartes[open]::backdrop {
+      animation: cartes-voile 0.4s ease-out;
+    }
+  }
+
+  @keyframes cartes-monter {
+    from {
+      transform: translateY(100%);
+    }
+  }
+
+  @keyframes cartes-voile {
+    from {
+      opacity: 0;
+    }
+  }
+
   .pied {
     background: var(--vert-2);
     color: var(--sur-vert);
