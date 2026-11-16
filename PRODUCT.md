@@ -57,6 +57,7 @@ Rubriques demandées par le client, et seulement celles-ci en navigation princip
 
 - Textes de l'ancien site : présentation du parcours, club-house, carte des distances trou par trou (4 repères), tarifs green-fee au 1er janvier 2026, quatre actualités (2019-2021), deux compétitions à venir (15/11/2026 November Cup, 22/11/2026 Scramble du Beaujolais).
 - Images de l'ancien site, basse définition (crédit : PAR72) : blason 445×545, 5 photos de galerie, 4 bannières 840×210, 3 visuels d'actualité. À remplacer par des photos HD du client.
+- Photos HD reçues du client le 16 novembre 2026 (20 vues du parcours en automne, 6 vues intérieures du club-house) : six sont en place (accueil, parcours, restaurant). Restent de l'ancien site : le blason, la terrasse du club-house, le massif de lavande et les visuels d'actualité. Les vues où figure la banderole « Drive en Champagne-Picardie » ont été écartées.
 - Absent, à ne pas inventer : avis clients, récompenses, carte du restaurant et prix, horaires au-delà de ceux publiés, descriptions trou par trou, résultats de compétitions.
 
 ## Product Principles

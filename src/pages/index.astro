@@ -9,8 +9,8 @@ import Fleche from '../components/Fleche.astro';
 import { site } from '../data/site';
 
 import blason from '../assets/blason.png';
-import aerienGreen from '../assets/photos/aerien-green.jpg';
-import aerienFairway from '../assets/photos/aerien-fairway.jpg';
+import parcoursAutomne from '../assets/photos/parcours-automne.jpg';
+import fairwayOr from '../assets/photos/fairway-or.jpg';
 import lavande from '../assets/photos/lavande.jpg';
 import clubHouse from '../assets/photos/club-house.jpg';
 
@@ -34,9 +34,10 @@ const actualites = (await getCollection('actualites'))
     <div class="ouverture__scene">
       <figure class="cadre ouverture__photo">
         <Image
-          src={aerienGreen}
-          alt="Vue aérienne d’un green de la Grande Romanie, gardé par trois bunkers de sable clair"
-          widths={[661]}
+          src={parcoursAutomne}
+          alt="Un fairway vallonné de la Grande Romanie, bordé de pins et d’arbres aux couleurs d’automne"
+          widths={[800, 1200, 1600, 2400]}
+          sizes="(min-width: 64rem) 60rem, 92vw"
           loading="eager"
           fetchpriority="high"
         />
@@ -71,9 +72,10 @@ const actualites = (await getCollection('actualites'))
       <div class="duo__image accroche">
         <figure class="cadre cadre--portrait cadre--devoile accroche__grande">
           <Image
-            src={aerienFairway}
-            alt="Vue aérienne d’un fairway vallonné et de ses bunkers, dans la lumière du soir"
-            widths={[439]}
+            src={fairwayOr}
+            alt="Un fairway qui file entre les arbres dorés, dans la lumière rasante du soir"
+            widths={[480, 800, 1200]}
+            sizes="(min-width: 56rem) 34rem, 80vw"
           />
         </figure>
         <figure class="cadre cadre--paysage accroche__petite">

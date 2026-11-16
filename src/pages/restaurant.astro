@@ -4,8 +4,8 @@ import Base from '../layouts/Base.astro';
 import Fleche from '../components/Fleche.astro';
 import { site } from '../data/site';
 
-import clubHouse from '../assets/photos/club-house.jpg';
-import lavande from '../assets/photos/lavande.jpg';
+import salle from '../assets/photos/salle.jpg';
+import salon from '../assets/photos/salon.jpg';
 import seminaires from '../assets/actualites/seminaires.jpg';
 ---
 
@@ -21,9 +21,10 @@ import seminaires from '../assets/actualites/seminaires.jpg';
   <div class="conteneur">
     <figure class="cadre maison">
       <Image
-        src={clubHouse}
-        alt="Le club-house et sa terrasse, vus depuis le green d’entraînement"
-        widths={[660]}
+        src={salle}
+        alt="La salle du restaurant : de longues tables de bois sous un plafond lambrissé, le long des fenêtres"
+        widths={[800, 1200, 1600, 2000]}
+        sizes="(min-width: 56rem) 50rem, 92vw"
         loading="eager"
       />
     </figure>
@@ -72,7 +73,12 @@ import seminaires from '../assets/actualites/seminaires.jpg';
         </p>
       </div>
       <figure class="duo__image cadre cadre--paysage cadre--devoile">
-        <Image src={lavande} alt="Le parcours vu des abords du club-house, derrière un massif de lavande" widths={[700]} />
+        <Image
+          src={salon}
+          alt="Le salon du club-house, ses fauteuils et ses canapés devant les baies vitrées"
+          widths={[700, 1100, 1600, 2000]}
+          sizes="(min-width: 56rem) 40rem, 92vw"
+        />
       </figure>
     </div>
   </section>
@@ -103,10 +109,6 @@ import seminaires from '../assets/actualites/seminaires.jpg';
     max-width: 50rem;
     margin-inline: auto;
     aspect-ratio: 2 / 1;
-  }
-
-  .maison :global(img) {
-    object-position: 50% 12%;
   }
 
   .salle {

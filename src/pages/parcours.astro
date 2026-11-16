@@ -4,8 +4,8 @@ import Base from '../layouts/Base.astro';
 import CarteScore from '../components/CarteScore.astro';
 import { reperes, trous, totaux, milliers } from '../data/parcours';
 
-import depart from '../assets/photos/depart.jpg';
-import aerienFairway from '../assets/photos/aerien-fairway.jpg';
+import greenTraverses from '../assets/photos/green-traverses.jpg';
+import bouleau from '../assets/photos/bouleau.jpg';
 
 const somme = (liste: typeof trous, cle: 'par' | 'blanc' | 'jaune' | 'bleu' | 'rouge') =>
   liste.reduce((t, trou) => t + trou[cle], 0);
@@ -42,7 +42,13 @@ const carnets = [
 
   <section class="conteneur duo recit">
     <figure class="duo__image cadre cadre--paysage recit__photo">
-      <Image src={depart} alt="Un départ du parcours, entre deux rideaux d’arbres, sous un ciel dégagé" widths={[700]} loading="eager" />
+      <Image
+        src={greenTraverses}
+        alt="Un green surélevé et son drapeau rouge, défendu par un bunker aux parois de traverses de bois"
+        widths={[700, 1100, 1600, 2000]}
+        sizes="(min-width: 56rem) 48rem, 92vw"
+        loading="eager"
+      />
     </figure>
     <div class="duo__texte texte">
       <h2>Technique, venté, dépaysant</h2>
@@ -65,7 +71,12 @@ const carnets = [
         </p>
       </blockquote>
       <figure class="cadre cadre--portrait cadre--devoile">
-        <Image src={aerienFairway} alt="Vue aérienne d’un fairway vallonné bordé de bunkers" widths={[439]} />
+        <Image
+          src={bouleau}
+          alt="Un grand bouleau à contre-jour au bord d’un bunker, en fin de journée"
+          widths={[480, 800, 1200]}
+          sizes="22rem"
+        />
       </figure>
     </div>
   </section>
